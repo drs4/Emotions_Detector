@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EmotionDetector.Models;
+using EmotionDetector.Resources;
 using LiveCharts; //Core of the library
 using LiveCharts.Wpf; //The WPF controls
 using LiveCharts.WinForms;
@@ -26,6 +29,15 @@ namespace EmotionDetector
     {
         public MainForm()
         {
+            GlobalSettings settings = new GlobalSettings();
+            //if (string.IsNullOrEmpty(settings.Lang))
+            //{
+            //    CultureInfo ci = CultureInfo.InstalledUICulture;//get system lang
+
+            //    settings.Lang = ci.TwoLetterISOLanguageName;
+            //    settings.Save();
+            //}
+            ChangeLanguage(settings.Lang);
             InitializeComponent();
             Func<ChartPoint, string> labelPoint = chartPoint =>
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
@@ -34,7 +46,7 @@ namespace EmotionDetector
             {
                 new PieSeries
                 {
-                    Title = "Happiness",
+                    Title = Strings.Happiness,
                     Values = new ChartValues<double> { 125 },
                     PushOut = 15,
                     DataLabels = false,
@@ -42,7 +54,7 @@ namespace EmotionDetector
                 },
                 new PieSeries
                 {
-                    Title = "Sadness",
+                    Title = Strings.Sadness,
                     Values = new ChartValues<double> {125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
@@ -50,35 +62,35 @@ namespace EmotionDetector
 
                 new PieSeries
                 {
-                    Title = "Anger",
+                    Title = Strings.Anger,
                     Values = new ChartValues<double> { 125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
-                    Title = "Contempt",
+                    Title = Strings.Contempt,
                     Values = new ChartValues<double> { 125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
-                    Title = "Disgust",
+                    Title = Strings.Disgust,
                     Values = new ChartValues<double> {125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
-                    Title = "Fear",
+                    Title = Strings.Fear,
                     Values = new ChartValues<double> { 125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
                 },
                 new PieSeries
                 {
-                    Title = "Surprise",
+                    Title = Strings.Surprise,
                     Values = new ChartValues<double> { 125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
@@ -86,7 +98,7 @@ namespace EmotionDetector
 
                 new PieSeries
                 {
-                    Title = "Neutral",
+                    Title = Strings.Neutral,
                     Values = new ChartValues<double> { 125 },
                     DataLabels = false,
                     LabelPoint = labelPoint
@@ -178,7 +190,7 @@ namespace EmotionDetector
                     {
                         new PieSeries
                         {
-                            Title = "Happiness",
+                            Title = Strings.Happiness,
                             Values = new ChartValues<double> { score.happiness },
                             PushOut = 15,
                             DataLabels = false,
@@ -186,7 +198,7 @@ namespace EmotionDetector
                         },
                         new PieSeries
                         {
-                            Title = "Sadness",
+                            Title = Strings.Sadness,
                             Values = new ChartValues<double> { score.sadness },
                             DataLabels = false,
                             LabelPoint = labelPoint
@@ -194,35 +206,35 @@ namespace EmotionDetector
 
                         new PieSeries
                         {
-                            Title = "Anger",
+                            Title = Strings.Anger,
                             Values = new ChartValues<double> { score.anger },
                             DataLabels = false,
                             LabelPoint = labelPoint
                         },
                         new PieSeries
                         {
-                            Title = "Contempt",
+                            Title = Strings.Contempt,
                             Values = new ChartValues<double> { score.contempt },
                             DataLabels = false,
                             LabelPoint = labelPoint
                         },
                         new PieSeries
                         {
-                            Title = "Disgust",
+                            Title = Strings.Disgust,
                             Values = new ChartValues<double> { score.disgust },
                             DataLabels = false,
                             LabelPoint = labelPoint
                         },
                         new PieSeries
                         {
-                            Title = "Fear",
+                            Title = Strings.Fear,
                             Values = new ChartValues<double> { score.fear },
                             DataLabels = false,
                             LabelPoint = labelPoint
                         },
                         new PieSeries
                         {
-                            Title = "Surprise",
+                            Title = Strings.Surprise,
                             Values = new ChartValues<double> { score.surprise },
                             DataLabels = false,
                             LabelPoint = labelPoint
@@ -230,7 +242,7 @@ namespace EmotionDetector
 
                         new PieSeries
                         {
-                            Title = "Neutral",
+                            Title = Strings.Neutral,
                             Values = new ChartValues<double> { score.neutral },
                             DataLabels = false,
                             LabelPoint = labelPoint
@@ -294,10 +306,37 @@ namespace EmotionDetector
 
         }
 
+        private void ChangeLanguage(string lang)
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                System.Globalization.CultureInfo.GetCultureInfo(lang);
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                System.Globalization.CultureInfo.GetCultureInfo(lang);
+
+            
+
+        }
+
         private void tmrStopAnimation_Tick(object sender, EventArgs e)
         {
             tmrStopAnimation.Enabled = false;
             Animate(pctLoading, !IsAnimating(pctLoading));
+        }
+
+        private void btnChangeLang_Click(object sender, EventArgs e)
+        {
+            GlobalSettings settings = new GlobalSettings();
+            if (settings.Lang.Equals("en"))
+            {
+                settings.Lang = "ar";
+            }
+            else
+            {
+                settings.Lang = "en";
+            }
+            settings.Save();
+            Application.Restart();
         }
     }
 }

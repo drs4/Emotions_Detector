@@ -1,4 +1,6 @@
-﻿namespace EmotionDetector
+﻿using EmotionDetector.Resources;
+
+namespace EmotionDetector
 {
     partial class MainForm
     {
@@ -38,6 +40,7 @@
             this.pctFeedback = new System.Windows.Forms.PictureBox();
             this.pctLoading = new System.Windows.Forms.PictureBox();
             this.pctMain = new System.Windows.Forms.PictureBox();
+            this.btnChangeLang = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pctFeedback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctLoading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctMain)).BeginInit();
@@ -57,7 +60,7 @@
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(127, 64);
             this.btnBrowse.TabIndex = 3;
-            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.Text = global::EmotionDetector.Resources.Strings.Browse;
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -72,7 +75,7 @@
             this.btnTry.Name = "btnTry";
             this.btnTry.Size = new System.Drawing.Size(109, 64);
             this.btnTry.TabIndex = 5;
-            this.btnTry.Text = "Try Reading Me!";
+            this.btnTry.Text = global::EmotionDetector.Resources.Strings.ReadMe;
             this.btnTry.UseVisualStyleBackColor = true;
             this.btnTry.Click += new System.EventHandler(this.btnTry_Click);
             // 
@@ -113,12 +116,23 @@
             this.pctMain.TabIndex = 4;
             this.pctMain.TabStop = false;
             // 
+            // btnChangeLang
+            // 
+            this.btnChangeLang.Location = new System.Drawing.Point(348, 314);
+            this.btnChangeLang.Name = "btnChangeLang";
+            this.btnChangeLang.Size = new System.Drawing.Size(133, 64);
+            this.btnChangeLang.TabIndex = 8;
+            this.btnChangeLang.Text = global::EmotionDetector.Resources.Strings.ChangeLang;
+            this.btnChangeLang.UseVisualStyleBackColor = true;
+            this.btnChangeLang.Click += new System.EventHandler(this.btnChangeLang_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnTry;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 390);
+            this.Controls.Add(this.btnChangeLang);
             this.Controls.Add(this.pctFeedback);
             this.Controls.Add(this.pctLoading);
             this.Controls.Add(this.btnTry);
@@ -148,6 +162,7 @@
         private System.Windows.Forms.PictureBox pctLoading;
         private System.Windows.Forms.Timer tmrStopAnimation;
         private System.Windows.Forms.PictureBox pctFeedback;
+        private System.Windows.Forms.Button btnChangeLang;
     }
 }
 
