@@ -88,7 +88,7 @@ namespace EmotionDetector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Language.
+        ///   Looks up a localized string similar to العربية.
         /// </summary>
         public static string ChangeLang {
             get {

@@ -118,7 +118,7 @@ namespace EmotionDetector
             // 
             // btnChangeLang
             // 
-            this.btnChangeLang.Location = new System.Drawing.Point(348, 314);
+            this.btnChangeLang.Location = new System.Drawing.Point(359, 314);
             this.btnChangeLang.Name = "btnChangeLang";
             this.btnChangeLang.Size = new System.Drawing.Size(133, 64);
             this.btnChangeLang.TabIndex = 8;
